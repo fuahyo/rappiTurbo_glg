@@ -10,7 +10,7 @@ components = json['dynamic_list_response']['data']['components']
 components.each do |component|
     products = component['resource']['products']
     products.each_with_index do |prod, i|
-        url = "https://www.rappi.cl/producto/" + prod["id"]
+        url = "https://www.rappi.com.ar/producto/" + prod["id"]
         pages << {
             url: url,
             method: "GET",
