@@ -55,29 +55,29 @@ regexps = [
     /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
 ]
 regexps.find {|regexp| product['presentation'] =~ regexp}
-item_size = product['quantity'].to_s
+item_size = $1
 uom = $2
 
 product_pieces = ''
-regexps_pack = [
-    /(\d+)\s+Unidades/i,
-    /(\d+)\s+latas/i,
-    /(\d+)\s+un/i,
-    /(\d+)\s+Red Bull/i,
-    /(\d+)\s+boites/i,
-    /(\d+)\s+bouteilles/i,
-    /(\d+)\s+?[Xx]/i,
-    /(\d+)[Xx]/i,
-    /[Xx]\s+?(\d+)/
-]
-regexps_pack.find {|regexp| product['presentation'] =~ regexp}
-product_pieces = $1
+# regexps_pack = [
+#     /(\d+)\s+Unidades/i,
+#     /(\d+)\s+latas/i,
+#     /(\d+)\s+un/i,
+#     /(\d+)\s+Red Bull/i,
+#     /(\d+)\s+boites/i,
+#     /(\d+)\s+bouteilles/i,
+#     /(\d+)\s+?[Xx]/i,
+#     /(\d+)[Xx]/i,
+#     /[Xx]\s+?(\d+)/
+# ]
+# regexps_pack.find {|regexp| product['presentation'] =~ regexp}
+product_pieces = product['quantity'].to_s
 
-if !product_pieces.nil?
-    if item_size.include?(' x ')
-        item_size = item_size.gsub(/(\d+)[Xx]\s+/)
-    end
-end
+# if !product_pieces.nil?
+#     if item_size.include?(' x ')
+#         item_size = item_size.gsub(/(\d+)[Xx]\s+/)
+#     end
+# end
 product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
 
 promo_attributes = ''
