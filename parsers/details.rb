@@ -12,7 +12,7 @@ if page['response_status_code'] == 404
             'user-agent' => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36",
             "accept"=> "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             "accept-encoding"=> "gzip, deflate, br",
-            "accept-language"=> "en-US,en;q=0.9",
+            "accept-language"=> "en-US,en;q=0.9", 
         },
         driver: {
             name: "#{page['url']}_#{rand}",
@@ -65,7 +65,7 @@ else
         /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
         /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
         /(\d*[\.,]?\d+)\s?([Ll])/,
-        /(\d*[\.,]?\d+)\s?([Gg])/,
+        /(\d*[\.,]?\d+)\s?([Gg][Rr])/,
         /(\d*[\.,]?\d+)\s?([Ll]itre)/,
         /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
         /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
@@ -77,27 +77,62 @@ else
         /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
         /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
         /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
+        /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
+        /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
+        /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
     ]
     regexps.find {|regexp| product['presentation'] =~ regexp}
     item_size = $1
-    uom = $2
 
-    uom = product['unit_type'] if uom.nil? || uom.empty?
+    if item_size.nil?
+        regexps = [
+            /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
+            /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
+            /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
+            /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
+            /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
+            /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
+            /(\d*[\.,]?\d+)\s?([Oo]unce)/,
+            /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
+            /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
+            /(\d*[\.,]?\d+)\s?([Ll])/,
+            /(\d*[\.,]?\d+)\s?([Gg][Rr])/,
+            /(\d*[\.,]?\d+)\s?([Ll]itre)/,
+            /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
+            /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
+            /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
+            /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
+            /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
+            /(\d*[\.,]?\d+)\s?([Cc]hews)/,
+            /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
+            /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
+            /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
+            /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
+            /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
+            /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
+            /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
+        ]
+        regexps.find {|regexp| product['description'] =~ regexp}
+        item_size = $1
+    end
+    item_size = product['quantity'].to_s if item_size.nil?
+    uom = product['unit_type'] 
     product_pieces = ''
-    # regexps_pack = [
-    #     /(\d+)\s+Unidades/i,
-    #     /(\d+)\s+latas/i,
-    #     /(\d+)\s+un/i,
-    #     /(\d+)\s+Red Bull/i,
-    #     /(\d+)\s+boites/i,
-    #     /(\d+)\s+bouteilles/i,
-    #     /(\d+)\s+?[Xx]/i,
-    #     /(\d+)[Xx]/i,
-    #     /[Xx]\s+?(\d+)/
-    # ]
-    # regexps_pack.find {|regexp| product['presentation'] =~ regexp}
-    product_pieces = product['quantity'].to_s
+    regexps_pack = [
+        # /(\d+)\s+Unidades/i,
+        # /(\d+)\s+latas/i,
+        # /(\d+)\s+un/i,
+        # /(\d+)\s+Red Bull/i,
+        # /(\d+)\s+boites/i,
+        # /(\d+)\s+bouteilles/i,
+        # /(\d+)\s+?[Xx]/i,
+        /(\d+)[Xx]/i,
+        # /[Xx]\s+?(\d+)/
+    ]
+    regexps_pack.find {|regexp| product['presentation'] =~ regexp}
+    product_pieces = $1
 
+    product_pieces = '1' if product_pieces.nil?
     # if !product_pieces.nil?
     #     if item_size.include?(' x ')
     #         item_size = item_size.gsub(/(\d+)[Xx]\s+/)
