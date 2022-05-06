@@ -176,7 +176,7 @@ else
         '_collection' => 'items',
         '_id' => competitor_product_id,
         'competitor_name' => 'Rappi Turbo',
-        'competitor_type' => 'Local_Store',
+        'competitor_type' => 'Others',
         'store_name' => "Turbo Fresh",
         'store_id' => store_id,
         'country_iso' => 'AR',
