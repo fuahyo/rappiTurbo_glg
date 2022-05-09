@@ -9,7 +9,7 @@ module ReqHeaders
         "authorization"=> "Bearer ft.gAAAAABidW7cp-DV22xrnWEIaHYPbL1WodPXiXC5i6TTuKhdUgpFIRVvwAuDYn54MYf8RTaUK1NscCIF5wlE9AvFe2DfgQG1T6tZqrMreieQf3OwZuAFZuUSA0gaAw7234zWR33kZt4fr41IVET5_CDEKcfCirbmWvjuHoO3zBkzwXeDCcSTcTUDB9w4h0gEx80yn6nIBO7RIZX-UuDfbMv8OrHS5lzZvJpYcnO8g8gxSjnIPHIHo56eqlKDsA6aTACoPqGqWxsrJQAHNKkMG5WOlCSM7qH6O5RqfbsgphN25SHquwzz_b1kZuC-n3Hqd-pMKecAEV2FZQ3ppzaD6ZbfyXlwvPGpBtINZ3HcpeSoHLfusvyo04s=",
         # "content-length"=>203,
         "content-type"=> "application/json",
-        "deviceid"=> "9cd99e0b-730b-40f7-b8aa-41e5685aa5cf",
+        "deviceid"=> "d6b3f72a-9f46-4cb3-8a25-475d6c3f9a4e",
         "ignorerefreshtoken"=> "false",
         "ignoretoken"=> "false",
         "include_context_info"=> "true",
