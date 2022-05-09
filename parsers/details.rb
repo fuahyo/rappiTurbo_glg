@@ -110,7 +110,7 @@ else
         ]
         regexps.find {|regexp| product['name'] =~ regexp}
         item_size = $1
-        uom = 2
+        uom = $2
     end
     promo_attributes = ''
     if product['have_discount'] == true
