@@ -102,12 +102,15 @@ else
     # regexps_pack.find {|regexp| product['presentation'] =~ regexp}
     product_pieces = product['quantity'].to_s
     product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
-    if product_pieces.nil?
+    if product_pieces.nil? || product_pieces == '0'
+        product_pieces = '1'
         regexps = [
-            /(\d*[\.,]?\d+)\s+Hojas/,
+            /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
+            /(\d*[\.,]?\d+)\s?(Hojas)/,
         ]
         regexps.find {|regexp| product['name'] =~ regexp}
-        product_pieces = $1
+        item_size = $1
+        uom = 2
     end
     promo_attributes = ''
     if product['have_discount'] == true
