@@ -76,6 +76,9 @@ else
         /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
         /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
         /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
+        /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
+        /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
+        /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
         /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
     ]
     regexps.find {|regexp| product['presentation'] =~ regexp}
@@ -83,6 +86,7 @@ else
     uom = $2
 
     uom = product['unit_type'] if uom.nil? || uom.empty?
+    item_size = product['quantity'] if item_size.nil? || item_size.empty?
     product_pieces = ''
     # regexps_pack = [
     #     /(\d+)\s+Unidades/i,
@@ -96,9 +100,15 @@ else
     #     /[Xx]\s+?(\d+)/
     # ]
     # regexps_pack.find {|regexp| product['presentation'] =~ regexp}
-    product_pieces = product_pieces = product['quantity'].to_s
+    product_pieces = product['quantity'].to_s
     product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
-
+    if product_pieces.nil?
+        regexps = [
+            /(\d*[\.,]?\d+)\s+Hojas/,
+        ]
+        regexps.find {|regexp| product['name'] =~ regexp}
+        product_pieces = $1
+    end
     promo_attributes = ''
     if product['have_discount'] == true
         promo_attributes = {
