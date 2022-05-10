@@ -162,6 +162,7 @@ else
         regexps.find {|regexp| product['presentation'] =~ regexp}
         item_size = $1
     end
+
     promo_attributes = ''
     if product['have_discount'] == true
         promo_attributes = {
