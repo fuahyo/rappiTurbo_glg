@@ -6,7 +6,7 @@ module ReqHeaders
         "access-control-allow-headers"=> "*",
         "access-control-allow-origin"=> "*",
         "app-version"=> "web_v1.19.2",
-        "authorization"=> "Bearer ft.gAAAAABidW7cp-DV22xrnWEIaHYPbL1WodPXiXC5i6TTuKhdUgpFIRVvwAuDYn54MYf8RTaUK1NscCIF5wlE9AvFe2DfgQG1T6tZqrMreieQf3OwZuAFZuUSA0gaAw7234zWR33kZt4fr41IVET5_CDEKcfCirbmWvjuHoO3zBkzwXeDCcSTcTUDB9w4h0gEx80yn6nIBO7RIZX-UuDfbMv8OrHS5lzZvJpYcnO8g8gxSjnIPHIHo56eqlKDsA6aTACoPqGqWxsrJQAHNKkMG5WOlCSM7qH6O5RqfbsgphN25SHquwzz_b1kZuC-n3Hqd-pMKecAEV2FZQ3ppzaD6ZbfyXlwvPGpBtINZ3HcpeSoHLfusvyo04s=",
+        "authorization"=> "Bearer ft.gAAAAABihQW90DcudU9LvH985o11TcHAywwQfs7Su8SHLKwYkrUBIn2X-OxS-LXAKSm8xbbECQvl8HuYxjglVMF9YxaYuoVzk9wZle3jTp8g5VPmrKf1fQ1hh_Vx5YBVT81RyW_3iyLF-hd1Bn5FxTsphD23dZ-_e7Ee7sFUbQJt9Nkat0jpy8Xs5tQGcZRSV3f5Z7DOLiYUVTLPdaFIGSxru-Jy1v1FZFnsVntTxgWnNcHYQEf7oPYzL9DRHg8v3xb1bAA0i5DfYHtcI4-_WBh57Sxgsz-1EOqCPySn-Z8hVRaP8A8hXnqhntzf47n1RXdbjUv9GaGF-8yenOHfu62l0wRnnnhUWM_dvaediPAPzHfw7oOsz-0=",
         # "content-length"=>203,
         "content-type"=> "application/json",
         "deviceid"=> "95e1c7a4-f66a-4ec6-97be-2b3339ab9b81",
