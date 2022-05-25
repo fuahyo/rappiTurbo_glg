@@ -22,7 +22,7 @@ parsers:
 exporters:
   - exporter_name: products_json
     exporter_type: json
-    collection: products
+    collection: items
     offset: 0
     order: desc
     write_mode: pretty_array
