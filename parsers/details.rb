@@ -81,7 +81,7 @@ else
             /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
             /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
             /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
-            /(\d*[\.,]?\d+)\s.([Uu]nd)/i,
+            /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
             /(\d*[\.,]?\d+)\s?([Mm])/i,
         ]
         regexps.find {|regexp| product['presentation'] =~ regexp}
@@ -155,18 +155,18 @@ else
     end
 
     product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
-    if item_size.nil?
-        regexps = [
-            /(\d*[\.,]?\d+)/
-        ]
-        regexps.find {|regexp| product['presentation'] =~ regexp}
-        item_size = $1
-    end
+    # if item_size.nil?
+    #     regexps = [
+    #         /(\d*[\.,]?\d+)/
+    #     ]
+    #     regexps.find {|regexp| product['presentation'] =~ regexp}
+    #     item_size = $1
+    # end
 
     promo_attributes = ''
     if product['have_discount'] == true
         promo_attributes = {
-            "promo_detail": "'#{html.css('.styles__ProductDiscount-sc-wsd7vq-8.jnfIRv').text.strip} off'"
+            "promo_detail": "'#{html.css('.styles__ProductDiscount-sc-lmtygo-9.sWkWL').text.strip} off'"
         }.to_json
     else
         promo_attributes = {
