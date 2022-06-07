@@ -193,6 +193,11 @@ else
     end
 
     reviews = {"num_total_review":0, "avg_rating":0}.to_json
+    if brand.include? ('Turbo')
+        is_private_label = false
+    else
+        is_private_label = true
+    end
     # require 'byebug'
     # byebug
     outputs << {
@@ -231,7 +236,7 @@ else
         'is_promoted' => is_promoted,
         'type_of_promotion' => is_promoted == true ? 'Banner' : nil,
         'promo_attributes'=> is_promoted == false ? nil : promo_attributes,
-        'is_private_label' => brand.empty? ? nil : (brand.include?('Turbo')),
+        'is_private_label' => brand.empty? ? nil : is_private_label,
         'latitude' => nil, #prod_body['props']['pageProps']['product_detail_response']['data']['context_info']['store']['lat'].to_s,
         'longitude' => nil, #prod_body['props']['pageProps']['product_detail_response']['data']['context_info']['store']['lng'].to_s,
         'reviews' => nil,
