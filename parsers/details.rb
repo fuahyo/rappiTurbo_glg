@@ -28,7 +28,7 @@ else
     prod_body = JSON.parse(html.at('script#__NEXT_DATA__').text)
     brand_body = JSON.parse(html.at('script[type="application/ld+json"]').text)
 
-    product = prod_body['props']['pageProps']['product_detail_response']['data']['components'][0]['resource']['product']
+    product = prod_body['props']['pageProps']['master_product_detail_response']['data']['components'][0]['resource']['product']
 
     description = product['description']
     brand = brand_body['brand']['name']
