@@ -168,7 +168,7 @@ else
     promo_attributes = ''
     if product['have_discount'] == true
         promo_attributes = {
-            "promo_detail": "'#{html.css('.styles__ProductDiscount-sc-lmtygo-9.sWkWL').text.strip} off'"
+            "promo_detail": "'#{html.css('.sc-ifAKCX.iemudu.sc-630d76da-9.davlYg').text.strip} off'"
         }.to_json
     else
         promo_attributes = {
