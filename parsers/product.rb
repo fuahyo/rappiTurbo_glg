@@ -16,7 +16,7 @@ components.each do |component|
             method: "GET",
             page_type: "details",
             driver: {
-                name: "#{url}_#{rand()}"
+                name: "#{url}"
             },
             vars: {
                 rank: i+1,
