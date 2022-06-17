@@ -204,7 +204,7 @@ else
     # byebug
     outputs << {
         '_collection' => 'items',
-        '_id' => competitor_product_id,
+        '_id' => prod_url,
         'competitor_name' => 'Rappi Turbo',
         'competitor_type' => 'dmart',
         'store_name' => "Turbo Fresh",
