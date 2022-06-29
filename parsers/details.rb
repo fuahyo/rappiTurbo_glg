@@ -1,6 +1,5 @@
 html = Nokogiri::HTML(content)
-require 'byebug'
-byebug
+
 unless content.include?('Producto no disponible')
     vars = page['vars']
     if page['response_status_code'] == 404
