@@ -5,11 +5,11 @@ module ReqHeaders
         "accept-language"=> "es-AR",
         "access-control-allow-headers"=> "*",
         "access-control-allow-origin"=> "*",
-        "app-version"=> "web_v1.22.5",
-        "authorization"=> "Bearer ft.gAAAAABis6HLYagGCLX6zI_s7QrWdCHZllqaLoRLY6vkLIWbmiY2LjmNNdsV_tsSacwKBlUPltmLD8hu-xCj3DH5ARphWXrFDypZfeIgPuhMsFPBxjs8FewpwaeXx26f_D6zveFy_jNRUP_wzoRlKiI-P27LIhAQdgkK1y8F7ukt7IYq8sbwzT2Gqgve39lOrCBrj643k44K1cjQytpluuzvWBkjhk82ru_ro5T4W5j1V3WUDY_Lw2pkZHO-u1lNiNoll7SOFtdN-5jCoxnFM-_C3_Y_a5bmiKdkrjRSw94-17xMRCqxqOCxINqFGACF2kY70wkAOFD1xk40vOjZwKsZ5kwfF81YSCU4wBNb3kwbjs_H2l3_iTA=",
+        "app-version"=> "web_v1.22.9",
+        "authorization"=> "Bearer ft.gAAAAABivHc5OlL_CjCm6ztQzR-KNej-CgjhXL8-rW21x9ODeE90k7z7pEprO8hDEna_AakDaDbtFLmmh19p9wXxTBtBV3tztG5uN5qyaLtHPdrHGVERHtzBWXncWkIuy_RxSc26cmDCQVM96z5x_3r_s8HbuT1XADadqAl9c-1FptAqabi2pQSyg3n87qKBbEQgTaQb9vomf0zv5cq32XfZt_UpWfyT9Hb3nqWvyIg2VgsmkYTjs04XpuzSbWViKp5RnklUcQyP803FbmGhmeK-a_eHpb5z1hzApLHUMDnAz4Yrqnr0raCZHahtIxbsOcT2PphToKgI_Gn7yIop7L3RfD2wdHo6-EmxoVb9tuV6rayUteLDTXI=",
         # "content-length"=>203,
         "content-type"=> "application/json",
-        "deviceid"=> "978dd4e4-edb9-4406-83d4-3a75c91aa456",
+        "deviceid"=> "93d00b9e-b9f7-4d8f-b263-5116930f0ef4",
         # "ignorerefreshtoken"=> "false",
         # "ignoretoken"=> "false",
         "include_context_info"=> "true",
@@ -17,7 +17,7 @@ module ReqHeaders
         "needappsflyerid"=> "false",
         "origin"=> "https://www.rappi.com.ar",
         "referer"=> "https://www.rappi.com.ar",
-        "user-agent"=> "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+        "user-agent"=> "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
     }
     
 end
