@@ -1,6 +1,6 @@
 html = Nokogiri::HTML(content)
 
-if !content.include?('Producto no disponible')
+# if !content.include?('Producto no disponible')
     vars = page['vars']
     if page['response_status_code'] == 404
         refetch_count = (page['vars']['refetch_count'].nil?)? 1 : page['vars']['refetch_count'] + 1
@@ -250,4 +250,4 @@ if !content.include?('Producto no disponible')
             'variants'=> nil,
         }
     end
-end
+# end
