@@ -23,7 +23,7 @@ components.each do |component|
             vars: {
                 rank: i+1,
                 page_num: 1,
-                aisle_url: vars['aisle_url']
+                aisle_url: vars['aisle_url'],
                 real_price: real_price,
                 price: price
             }
