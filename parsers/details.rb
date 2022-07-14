@@ -184,15 +184,26 @@ html = Nokogiri::HTML(content)
         percentage = ''
         unless product['price'].nil?
             if product['real_price'] != product['price']
-                customer_price_lc = product['price']
-                base_price = product['real_price']
+                customer_price_lc = vars['price']
+                base_price = vars['real_price']
                 has_discount = true
                 is_promoted = true
                 percentage = (((base_price - customer_price_lc)/base_price.to_f)*100).to_f.round(7).to_s
             else
-                customer_price_lc = product['price']
-                base_price = product['price']
+                customer_price_lc = vars['price']
+                base_price = vars['price']
             end
+        end
+
+        promo_attributes = ''
+        if !percentage.nil? || !percentage.empty?
+            promo_attributes = {
+                "promo_detail": "'#{percentage.gsub(/\..*/,'')}% off'"
+            }.to_json
+        else
+            promo_attributes = {
+                "promo_detail": ""
+            }.to_json
         end
 
         reviews = {"num_total_review":0, "avg_rating":0}.to_json
