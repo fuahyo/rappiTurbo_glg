@@ -166,16 +166,16 @@ html = Nokogiri::HTML(content)
         #     item_size = $1
         # end
 
-        promo_attributes = ''
-        if product['have_discount'] == true
-            promo_attributes = {
-                "promo_detail": "'#{html.css('.sc-ifAKCX.iemudu.sc-630d76da-9.davlYg').text.strip} off'"
-            }.to_json
-        else
-            promo_attributes = {
-                "promo_detail": ""
-            }.to_json
-        end
+        # promo_attributes = ''
+        # if product['have_discount'] == true
+        #     promo_attributes = {
+        #         "promo_detail": "'#{html.css('.sc-ifAKCX.iemudu.sc-630d76da-9.davlYg').text.strip} off'"
+        #     }.to_json
+        # else
+        #     promo_attributes = {
+        #         "promo_detail": ""
+        #     }.to_json
+        # end
 
         customer_price_lc = ''
         base_price = ''
@@ -183,7 +183,7 @@ html = Nokogiri::HTML(content)
         is_promoted = false
         percentage = ''
         unless product['price'].nil?
-            if product['real_price'] != product['price']
+            if vars['real_price'] != vars['price']
                 customer_price_lc = vars['price']
                 base_price = vars['real_price']
                 has_discount = true
