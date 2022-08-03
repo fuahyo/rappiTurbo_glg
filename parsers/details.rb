@@ -30,7 +30,8 @@ html = Nokogiri::HTML(content)
         brand_body = JSON.parse(html.at('script[type="application/ld+json"]').text)
         # require 'byebug'
         # byebug
-        product = prod_body['props']['pageProps']['master_product_detail_response']['data']['components'][0]['resource']['product'] rescue nil
+        prod_friendly_url = "/p/#{prod_body['query']['master_product_friendly_url']}/-34.5887308--58.4302191"
+        product = prod_body['props']['pageProps']['fallback'][prod_friendly_url]['master_product_detail_response']['data']['components'][0]['resource']['product']
         product ||= prod_body['props']['pageProps']['product_detail_response']['data']['components'][0]['resource']['product']
 
         description = product['description']
