@@ -52,6 +52,7 @@ html = Nokogiri::HTML(content)
             availability = brand_body['offers']['availability']
             prod_url = brand_body['offers']['url']
         else
+            prod_url = page['url']
             currency_code_lc = brand_body['estimatedCost']['currency']
         end
         store_id = product['store_id']
