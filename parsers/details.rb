@@ -31,23 +31,38 @@ html = Nokogiri::HTML(content)
         # require 'byebug'
         # byebug
         prod_friendly_url = "/p/#{prod_body['query']['master_product_friendly_url']}/-34.5887308--58.4302191"
-        product = prod_body['props']['pageProps']['fallback'][prod_friendly_url]['master_product_detail_response']['data']['components'][0]['resource']['product']
-        product ||= prod_body['props']['pageProps']['product_detail_response']['data']['components'][0]['resource']['product']
-
+        if !prod_body['props']['pageProps']['fallback'].nil?
+            product = prod_body['props']['pageProps']['fallback'][prod_friendly_url]['master_product_detail_response']['data']['components'][0]['resource']['product']
+        else
+            product = prod_body['props']['pageProps']['product_detail_response']['data']['components'][0]['resource']['product']
+        end
+        # require 'byebug'
+        # byebug
         description = product['description']
-        brand = brand_body['brand']['name']
+        if !brand_body['brand'].nil?
+            brand = brand_body['brand']['name'] rescue nil
+        end
         name = product['name']
         category_id = product['category_id']
         category = vars['aisle_url'].gsub('-',' ')
         subcategory_name = product['category_name']
-        currency_code_lc = brand_body['offers']['priceCurrency']
+        # currency_code_lc = brand_body['offers']['priceCurrency']
+        if !brand_body['offers'].nil?
+            currency_code_lc = brand_body['offers']['priceCurrency']
+            availability = brand_body['offers']['availability']
+            prod_url = brand_body['offers']['url']
+        else
+            currency_code_lc = brand_body['estimatedCost']['currency']
+        end
         store_id = product['store_id']
         competitor_product_id = product['id']
 
-        image_url = brand_body['image']
-        sku = brand_body['sku']
-        prod_url = brand_body['offers']['url']
-        availability = brand_body['offers']['availability']
+        image_url = brand_body['image']['url'] rescue nil
+        image_url ||= brand_body['image'] rescue nil
+
+        sku = brand_body['sku'] rescue nil
+        # prod_url = brand_body['offers']['url']
+        # availability = brand_body['offers']['availability']
 
         attributes = product['attributes'].nil? ? nil : product['attributes'].map {|map| map}.first
         unless attributes.nil?
@@ -56,109 +71,118 @@ html = Nokogiri::HTML(content)
             }.to_json
         end
 
-        if product['presentation'].include? ('X')
-            item_size = ''
-            uom = ''
-            
-            regexps = [
-                /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
-                /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
-                /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
-                /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
-                /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
-                /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
-                /(\d*[\.,]?\d+)\s?([Oo]unce)/,
-                /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
-                /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
-                /(\d*[\.,]?\d+)\s?([Ll])/,
-                /(\d*[\.,]?\d+)\s?([Gg])/,
-                /(\d*[\.,]?\d+)\s?([Ll]itre)/,
-                /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
-                /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
-                /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
-                /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
-                /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
-                /(\d*[\.,]?\d+)\s?([Cc]hews)/,
-                /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
-                /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
-                /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
-                /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
-                /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
-                /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
-                /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
-                /(\d*[\.,]?\d+)\s?([Mm])/i,
-            ]
-            regexps.find {|regexp| product['presentation'] =~ regexp}
-            item_size = $1
-            uom = $2
-
-            product_pieces = ''
-            regexps_pack = [
-                /(\d+)\s?[Xx]./i,
-            ]
-            regexps_pack.find {|regexp| product['presentation'] =~ regexp}
-            product_pieces = $1
-
-            if product['quantity'] == '0'
-                product_pieces = '1'
+        if !product['presentation'].nil?
+            if product['presentation'].include? ('X')
+                item_size = ''
+                uom = ''
+                
                 regexps = [
+                    /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
+                    /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
+                    /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
+                    /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
+                    /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
+                    /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
+                    /(\d*[\.,]?\d+)\s?([Oo]unce)/,
                     /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
-                    /(\d*[\.,]?\d+)\s?(Hojas)/,
+                    /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
+                    /(\d*[\.,]?\d+)\s?([Ll])/,
+                    /(\d*[\.,]?\d+)\s?([Gg])/,
+                    /(\d*[\.,]?\d+)\s?([Ll]itre)/,
+                    /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
+                    /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
+                    /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
+                    /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
+                    /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
+                    /(\d*[\.,]?\d+)\s?([Cc]hews)/,
+                    /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
+                    /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
+                    /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
+                    /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
+                    /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
+                    /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
+                    /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
+                    /(\d*[\.,]?\d+)\s?([Mm])/i,
                 ]
-                regexps.find {|regexp| product['name'] =~ regexp}
+                regexps.find {|regexp| product['presentation'] =~ regexp}
                 item_size = $1
                 uom = $2
+
+                product_pieces = ''
+                regexps_pack = [
+                    /(\d+)\s?[Xx]./i,
+                ]
+                regexps_pack.find {|regexp| product['presentation'] =~ regexp}
+                product_pieces = $1
+
+                if product['quantity'] == '0'
+                    product_pieces = '1'
+                    regexps = [
+                        /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
+                        /(\d*[\.,]?\d+)\s?(Hojas)/,
+                    ]
+                    regexps.find {|regexp| product['name'] =~ regexp}
+                    item_size = $1
+                    uom = $2
+                end
+            else
+                item_size = ''
+                uom = ''
+                regexps = [
+                    /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
+                    /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
+                    /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
+                    /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
+                    /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
+                    /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
+                    /(\d*[\.,]?\d+)\s?([Oo]unce)/,
+                    /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
+                    /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
+                    /(\d*[\.,]?\d+)\s?([Ll])/,
+                    /(\d*[\.,]?\d+)\s?([Gg])/,
+                    /(\d*[\.,]?\d+)\s?([Ll]itre)/,
+                    /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
+                    /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
+                    /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
+                    /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
+                    /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
+                    /(\d*[\.,]?\d+)\s?([Cc]hews)/,
+                    /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
+                    /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
+                    /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
+                    /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
+                    /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
+                    /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
+                    /(\d*[\.,]?\d+)\s.([Uu]nd)/i,
+                    /(\d*[\.,]?\d+)\s?([Mm])/i,
+                ]
+                regexps.find {|regexp| product['presentation'] =~ regexp}
+                item_size = $1
+                uom = $2
+
+                product_pieces = '1'
+
+                if product['quantity'] == '0'
+                    product_pieces = '1'
+                    regexps = [
+                        /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
+                        /(\d*[\.,]?\d+)\s?(Hojas)/,
+                    ]
+                    regexps.find {|regexp| product['name'] =~ regexp}
+                    item_size = $1
+                    uom = $2
+                end
             end
-        else
-            item_size = ''
-            uom = ''
-            regexps = [
-                /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
-                /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
-                /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
-                /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
-                /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
-                /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
-                /(\d*[\.,]?\d+)\s?([Oo]unce)/,
-                /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
-                /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
-                /(\d*[\.,]?\d+)\s?([Ll])/,
-                /(\d*[\.,]?\d+)\s?([Gg])/,
-                /(\d*[\.,]?\d+)\s?([Ll]itre)/,
-                /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
-                /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
-                /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
-                /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
-                /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
-                /(\d*[\.,]?\d+)\s?([Cc]hews)/,
-                /(\d*[\.,]?\d+)\s?([Mm]illiliter)/i,
-                /(\d*[\.,]?\d+)\s?per\s?([Pp]ack)/i,
-                /(\d*[\.,]?\d+)\s?([Kk][Gg])/i,
-                /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
-                /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
-                /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
-                /(\d*[\.,]?\d+)\s.([Uu]nd)/i,
-                /(\d*[\.,]?\d+)\s?([Mm])/i,
-            ]
-            regexps.find {|regexp| product['presentation'] =~ regexp}
-            item_size = $1
-            uom = $2
 
-            product_pieces = '1'
-
-            if product['quantity'] == '0'
-                product_pieces = '1'
+            product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
+            if item_size.nil?
                 regexps = [
-                    /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
-                    /(\d*[\.,]?\d+)\s?(Hojas)/,
+                    /(\d*[\.,]?\d+)/
                 ]
-                regexps.find {|regexp| product['name'] =~ regexp}
+                regexps.find {|regexp| product['presentation'] =~ regexp}
                 item_size = $1
-                uom = $2
             end
         end
-
-        product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
         # if item_size.nil?
         #     regexps = [
         #         /(\d*[\.,]?\d+)/
@@ -208,7 +232,7 @@ html = Nokogiri::HTML(content)
         end
 
         reviews = {"num_total_review":0, "avg_rating":0}.to_json
-        if brand.include? ('Turbo')
+        if !brand.nil? and brand.include? ('Turbo')
             is_private_label = false
         else
             is_private_label = true
@@ -251,7 +275,7 @@ html = Nokogiri::HTML(content)
             'is_promoted' => is_promoted,
             'type_of_promotion' => is_promoted == true ? 'Banner' : nil,
             'promo_attributes'=> is_promoted == false ? nil : promo_attributes,
-            'is_private_label' => brand.empty? ? nil : is_private_label,
+            'is_private_label' => brand.nil? || brand.empty? ? nil : is_private_label,
             'latitude' => nil, #prod_body['props']['pageProps']['product_detail_response']['data']['context_info']['store']['lat'].to_s,
             'longitude' => nil, #prod_body['props']['pageProps']['product_detail_response']['data']['context_info']['store']['lng'].to_s,
             'reviews' => nil,
