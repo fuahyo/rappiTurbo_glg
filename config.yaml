@@ -33,6 +33,7 @@ exporters:
   - exporter_name: items_csv
     exporter_type: csv
     collection: items
+    start_on_job_done: true
     offset: 0
     order: desc
     fields:
