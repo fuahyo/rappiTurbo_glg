@@ -34,7 +34,7 @@ html = Nokogiri::HTML(content)
         if !prod_body['props']['pageProps']['fallback'].nil?
             product = prod_body['props']['pageProps']['fallback'][prod_friendly_url]['master_product_detail_response']['data']['components'][0]['resource']['product']
         else
-            product = prod_body['props']['pageProps']['product_detail_response']['data']['components'][0]['resource']['product']
+            product = prod_body['props']['pageProps']['master_product_detail_response']['data']['components'][0]['resource']['product']
         end
         # require 'byebug'
         # byebug
