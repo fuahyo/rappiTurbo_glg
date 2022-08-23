@@ -34,10 +34,10 @@ html = Nokogiri::HTML(content)
         if !prod_body['props']['pageProps']['fallback'].nil?
             product = prod_body['props']['pageProps']['fallback'][prod_friendly_url]['master_product_detail_response']['data']['components'][0]['resource']['product']
         else
-            product = prod_body['props']['pageProps']['master_product_detail_response']['data']['components'][0]['resource']['product']
+            product = prod_body['props']['pageProps']['master_product_detail_response']['data']['components'][0]['resource']['product'] rescue nil
+            product ||= prod_body['props']['pageProps']['product_detail_response']['data']['components'][0]['resource']['product']
         end
-        # require 'byebug'
-        # byebug
+
         description = product['description']
         if !brand_body['brand'].nil?
             brand = brand_body['brand']['name'] rescue nil
@@ -184,24 +184,6 @@ html = Nokogiri::HTML(content)
                 item_size = $1
             end
         end
-        # if item_size.nil?
-        #     regexps = [
-        #         /(\d*[\.,]?\d+)/
-        #     ]
-        #     regexps.find {|regexp| product['presentation'] =~ regexp}
-        #     item_size = $1
-        # end
-
-        # promo_attributes = ''
-        # if product['have_discount'] == true
-        #     promo_attributes = {
-        #         "promo_detail": "'#{html.css('.sc-ifAKCX.iemudu.sc-630d76da-9.davlYg').text.strip} off'"
-        #     }.to_json
-        # else
-        #     promo_attributes = {
-        #         "promo_detail": ""
-        #     }.to_json
-        # end
 
         customer_price_lc = ''
         base_price = ''
@@ -238,8 +220,7 @@ html = Nokogiri::HTML(content)
         else
             is_private_label = true
         end
-        # require 'byebug'
-        # byebug
+
         outputs << {
             '_collection' => 'items',
             '_id' => prod_url,
