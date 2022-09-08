@@ -72,6 +72,8 @@ html = Nokogiri::HTML(content)
             }.to_json
         end
 
+        require 'byebug'
+        byebug
         if !product['presentation'].nil?
             if product['presentation'].include? ('X')
                 item_size = ''
@@ -154,7 +156,7 @@ html = Nokogiri::HTML(content)
                     /(\d*[\.,]?\d+)\s?([Cc][Cc])/i,
                     /(\d*[\.,]?\d+)\s?([Mm][Tt])/i,
                     /(\d*[\.,]?\d+)\s?([Cc][Mm])/i,
-                    /(\d*[\.,]?\d+)\s.([Uu]nd)/i,
+                    /(\d*[\.,]?\d+)\s?([Uu]nd)/i,
                     /(\d*[\.,]?\d+)\s?([Mm])/i,
                 ]
                 regexps.find {|regexp| product['presentation'] =~ regexp}
@@ -175,7 +177,6 @@ html = Nokogiri::HTML(content)
                 end
             end
 
-            product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
             if item_size.nil?
                 regexps = [
                     /(\d*[\.,]?\d+)/
@@ -184,6 +185,8 @@ html = Nokogiri::HTML(content)
                 item_size = $1
             end
         end
+
+        product_pieces = '1' if product_pieces.nil? || product_pieces.empty?
 
         customer_price_lc = ''
         base_price = ''
