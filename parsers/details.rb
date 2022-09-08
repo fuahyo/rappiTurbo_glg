@@ -72,8 +72,6 @@ html = Nokogiri::HTML(content)
             }.to_json
         end
 
-        require 'byebug'
-        byebug
         if !product['presentation'].nil?
             if product['presentation'].include? ('X')
                 item_size = ''
