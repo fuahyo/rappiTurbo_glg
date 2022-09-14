@@ -26,14 +26,14 @@ exporters:
     offset: 0
     order: desc
     write_mode: pretty_array
-    export_filename: <d:yyyyMMdd>_<name>_AR
+    export_filename: <d:yyyyMMdd>_RappiTurbo_AR
     no_subfolder: true
     export_extension: json.gz
     no_tar: true
   - exporter_name: items_csv
     exporter_type: csv
     collection: items
-    export_filename: <d:yyyyMMdd>_<name>_AR
+    export_filename: <d:yyyyMMdd>_RappiTurbo_AR
     no_subfolder: true
     start_on_job_done: true
     offset: 0
