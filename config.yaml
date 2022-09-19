@@ -7,6 +7,12 @@ seeder:
   file: ./seeder/seeder.rb
   disabled: false
 parsers:
+  - page_type: get_auth_header
+    file: ./parsers/get_auth_header.rb
+    disable: false
+  - page_type: get_passport
+    file: ./parsers/get_passport.rb
+    disable: false
   - page_type: sub_aisle
     file: ./parsers/sub_aisle.rb
     disable: false
