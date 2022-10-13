@@ -197,7 +197,12 @@ html = Nokogiri::HTML(content)
                 base_price = vars['real_price']
                 has_discount = true
                 is_promoted = true
-                percentage = (((base_price - customer_price_lc)/base_price.to_f)*100).to_f.round(7).to_s
+                if base_price < customer_price_lc
+                    percentage = (((customer_price_lc - base_price)/customer_price_lc.to_f)*100).to_f.round(7).to_s
+                else
+                    percentage = (((base_price - customer_price_lc)/base_price.to_f)*100).to_f.round(7).to_s
+                end
+                # percentage = (((base_price - customer_price_lc)/base_price.to_f)*100).to_f.round(7).to_s
             else
                 customer_price_lc = vars['price']
                 base_price = vars['price']
