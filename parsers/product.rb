@@ -17,8 +17,10 @@ components.each do |component|
             url: url,
             method: "GET",
             page_type: "details",
+            fetch_type: "browsers",
             driver: {
-                name: "#{url}"
+                'name': "#{url}",
+                'code': "await sleep (5000)",
             },
             vars: {
                 rank: i+1,
