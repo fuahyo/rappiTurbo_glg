@@ -17,7 +17,7 @@ components.each do |component|
             url: url,
             method: "GET",
             page_type: "details",
-            fetch_type: "browsers",
+            fetch_type: "browser",
             driver: {
                 'name': "#{url}",
                 'code': "await sleep (5000)",
