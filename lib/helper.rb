@@ -82,7 +82,7 @@ class Helper
             competitor_product_id = product['id']
             name = product['name']
             brand = product['trademark']
-            category_id = nil
+            category_id = vars['cat_id']
             category = vars['cat']
             sub_category = subcat
             customer_price_lc = product['price'].to_f
@@ -97,9 +97,9 @@ class Helper
                 has_discount = true
                 discount_percentage = (((base_price_lc - customer_price_lc) / base_price_lc) * 100).round(7)
                 is_promoted = true
-                type_of_promotion = "badges"
+                type_of_promotion = "Banner"
                 promo_attributes = {
-                    promo_detail: "'Discount #{discount_percentage.ceil}%'"
+                    promo_detail: "'#{discount_percentage.ceil}% off'"
                 }.to_json
             end
             
@@ -145,13 +145,13 @@ class Helper
             pd = {
                 _id: competitor_product_id,
                 _collection: "products",
-                competitor_name: "RAPPI TURBO",
+                competitor_name: "rappi turbo",
                 competitor_type: "dmart",
-                store_name: store['name'],
+                store_name: "Turbo Fresh",
                 store_id: product['store_id'],
-                country_iso: "EC",
-                language: "SPA",
-                currency_code_lc: "USD",
+                country_iso: "AR",
+                language: "ESP",
+                currency_code_lc: "ARS",
                 scraped_at_timestamp: Time.now.strftime('%Y-%m-%d %H:%M:%S'),
                 competitor_product_id: competitor_product_id,
                 name: name,
@@ -179,8 +179,8 @@ class Helper
                 type_of_promotion: type_of_promotion,
                 promo_attributes: promo_attributes,
                 is_private_label: is_private_label,
-                latitude: latitude,
-                longitude: longitude,
+                latitude: nil,
+                longitude: nil,
                 reviews: nil,
                 store_reviews: nil,
                 item_attributes: item_attributes,

@@ -55,9 +55,10 @@ if parse
     json_data.each do |json|
         products = json['resource']['products']
         subcat = vars['sub_cat']
+        
         products.each do |product|
 
-            pd  = Helper.parseProduct(product, store, subcat,vars, i)
+            pd  = Helper.parseProduct(product, store, subcat, vars, i)
             outputs << pd
 
             i = i+1

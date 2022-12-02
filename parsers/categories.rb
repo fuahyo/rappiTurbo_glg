@@ -1,10 +1,12 @@
 html = Nokogiri::HTML(content)
 
 categories = html.css(".fVQdrF ul li")
+script = JSON.parse(html.at("script#__NEXT_DATA__"))
 i = 1
 
-categories.each do |category|
-    
+categories.each_with_index do |category, idx|
+    cat_id = script['props']['pageProps']['fallback']['storefront/185340-turbo-aab/catalog']['catalog_response']['data']['components'][0]['resource']['categories'][idx]['id']
+      
     cat = category.at_css("a[data-testid=\"typography\"]")
     subcategories = category.css('ul li a')
     
@@ -16,6 +18,7 @@ categories.each do |category|
             no_redirect: true,
             vars: {
                 cat: cat.text,
+                cat_id: cat_id,
                 sub_cat: subcategory.text,
                 page_number: 1
             }
@@ -31,6 +34,7 @@ categories.each do |category|
         no_redirect: true,
         vars: {
             cat: cat.text,
+            cat_id: cat_id,
             page_number: 1
         }
     }
