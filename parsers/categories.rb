@@ -1,6 +1,6 @@
 html = Nokogiri::HTML(content)
 
-categories = html.css(".hrwgsd ul li")
+categories = html.css(".fVQdrF ul li")
 # script = JSON.parse(html.at("script#__NEXT_DATA__"))
 i = 1
 
