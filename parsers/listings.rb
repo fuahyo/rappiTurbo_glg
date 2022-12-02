@@ -57,8 +57,9 @@ if parse
         subcat = vars['sub_cat']
         
         products.each do |product|
-
+            
             pd  = Helper.parseProduct(product, store, subcat, vars, i)
+            pd['category_id'] = product['category_id']
             outputs << pd
 
             i = i+1
