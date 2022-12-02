@@ -1,16 +1,17 @@
 html = Nokogiri::HTML(content)
 
-categories = html.css(".fVQdrF ul li")
+categories = html.css(".hrwgsd ul li")
 script = JSON.parse(html.at("script#__NEXT_DATA__"))
 i = 1
 
+cat_id = ''
 categories.each_with_index do |category, idx|
-    cat_id = script['props']['pageProps']['fallback']['storefront/185340-turbo-aab/catalog']['catalog_response']['data']['components'][0]['resource']['categories'][idx]['id']
-      
+    cat_id = script['props']['pageProps']['fallback']['storefront/185340-turbo-aab/catalog']['catalog_response']['data']['components'][0]['resource']['categories'][idx]['id'] rescue nil
     cat = category.at_css("a[data-testid=\"typography\"]")
     subcategories = category.css('ul li a')
-    
+
     subcategories.each do |subcategory|
+        
         pages << {
             page_type: "listings",
             url: "https://www.rappi.com.ar#{subcategory['href']}",
