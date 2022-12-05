@@ -145,7 +145,7 @@ class Helper
             pd = {
                 _id: competitor_product_id,
                 _collection: "products",
-                competitor_name: "rappi turbo",
+                competitor_name: "Rappi Turbo",
                 competitor_type: "dmart",
                 store_name: "Turbo Fresh",
                 store_id: product['store_id'],
