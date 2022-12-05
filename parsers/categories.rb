@@ -26,14 +26,14 @@ categories.each_with_index do |category, idx|
     
     i = i+1
 
-    pages << {
-        page_type: "sidebar_categories",
-        url: "https://www.rappi.com.ar#{cat['href']}",
-        headers: page['headers'],
-        no_redirect: true,
-        vars: {
-            cat: cat.text,
-            page_number: 1
-        }
-    }
+    # pages << {
+    #     page_type: "sidebar_categories",
+    #     url: "https://www.rappi.com.ar#{cat['href']}",
+    #     headers: page['headers'],
+    #     no_redirect: true,
+    #     vars: {
+    #         cat: cat.text,
+    #         page_number: 1
+    #     }
+    # }
 end
