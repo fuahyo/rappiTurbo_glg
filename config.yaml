@@ -5,7 +5,7 @@ seeder:
 parsers:
   - page_type: categories 
     file: "./parsers/categories.rb"
-    disabled: false
+    disabled: true
   - page_type: sidebar_categories 
     file: "./parsers/sidebar_categories.rb"
     disabled: false
