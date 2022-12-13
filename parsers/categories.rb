@@ -1,6 +1,6 @@
 html = Nokogiri::HTML(content)
 
-categories = html.css(".fVQdrF ul li")
+categories = html.css(".lioYQK ul li")
 # script = JSON.parse(html.at("script#__NEXT_DATA__"))
 i = 1
 
@@ -17,8 +17,7 @@ categories.each_with_index do |category, idx|
             headers: page['headers'],
             no_redirect: true,
             vars: {
-                cat: cat.text,
-                sub_cat: subcategory.text,
+                cat: subcategory['href'].split('/').last,
                 page_number: 1
             }
         }
