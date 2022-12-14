@@ -47,8 +47,8 @@ if parse
     store_front = page['url'].gsub('https://www.rappi.com.ar/tiendas', "storefront")
 
     json_data = json_script['props']['pageProps']['fallback'][store_front]['aisle_detail_response']['data']['components'] rescue nil
-    json_data = json_script['props']['pageProps']['aisle_detail_response']['data']['components'] if json_data.nil?
-
+    json_data = json_script['props']['pageProps']['aisle_detail_response']['data']['components'] rescue nil
+    json_data = json_script['props']['pageProps']['fallback'][store_front]['sub_aisles_response']['data']['components'] if json_data.nil?
 
     i = 1
 
