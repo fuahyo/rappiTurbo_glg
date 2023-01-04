@@ -51,19 +51,22 @@ if parse
     # json_data = json_script['props']['pageProps']['fallback'][store_front]['sub_aisles_response']['data']['components'] if json_data.nil?
 
     i = 1
-
-    json_script['props']['pageProps']['fallback'][store_front]['aisle_detail_response']['data']['components'].each do |json|
-        products = json['resource']['products']
-        subcat = vars['sub_cat']
-        
-        products.each do |product|
+    require 'byebug'
+    byebug
+    unless json_script['props']['pageProps']['fallback'][store_front]['sub_detail_response'].nil? 
+        json_script['props']['pageProps']['fallback'][store_front]['aisle_detail_response']['data']['components'].each do |json|
+            products = json['resource']['products']
+            subcat = vars['sub_cat']
             
-            pd  = Helper.parseProduct(product, store, subcat, vars, i)
-            pd['category_id'] = product['category_id']
-            outputs << pd
+            products.each do |product|
+                
+                pd  = Helper.parseProduct(product, store, subcat, vars, i)
+                pd['category_id'] = product['category_id']
+                outputs << pd
 
-            i = i+1
-        end    
+                i = i+1
+            end    
+        end
     end
 end
 
