@@ -51,8 +51,7 @@ if parse
     # json_data = json_script['props']['pageProps']['fallback'][store_front]['sub_aisles_response']['data']['components'] if json_data.nil?
 
     i = 1
-    require 'byebug'
-    byebug
+
     unless json_script['props']['pageProps']['fallback'][store_front]['sub_detail_response'].nil? 
         json_script['props']['pageProps']['fallback'][store_front]['aisle_detail_response']['data']['components'].each do |json|
             products = json['resource']['products']
