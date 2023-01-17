@@ -3,7 +3,7 @@ require "./lib/helper"
 html = Nokogiri::HTML(content)
 vars = page['vars']
 
-categories = html.css('div[data-qa="slider"]')
+categories = html.css('div[data-qa="wrapper-component"] div').select{|s| s['data-qa'] =~ /store-corridors-list-aisle/i}
 parser = false
 
 if categories.count > 0
@@ -30,6 +30,11 @@ else
     }
 end
 
+if html.at_css('div[data-qa="page-wrapper-component"]') or html.at_css('.sliderDesktop h2[data-testid="typography"]')
+    parser = true
+    
+end
+
 if parser
     article = html.at_css('article')
     store = JSON.parse(article.text)
@@ -41,6 +46,7 @@ if parser
     store_front = page['url'].gsub('https://www.rappi.com.ar/tiendas', "storefront")
 
     json_data = json_script['props']['pageProps']['sub_aisles_response']['data']['components'] rescue nil
+    json_data = json_script['props']['pageProps']['fallback'][store_front]['sub_aisles_response']['data']['components'] rescue nil
     json_data = json_script['props']['pageProps']['fallback'][store_front]['sub_aisles_response']['data']['components'] if json_data.nil?
     json_data.each do |json|
         products = json['resource']['products']
