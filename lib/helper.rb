@@ -130,9 +130,9 @@ class Helper
                 img_url = "https://images.rappi.com.ec/products/#{product['images'].first}"
             end
             
-            barcode = competitor_product_id
             sku = product['product_id']
             product_url = "https://www.rappi.com.ar/p/#{name.downcase.gsub(' ','-').gsub('/', '')}-#{product['master_product_id']}"
+            barcode = product_url.split('-').last
             is_available = product['in_stock']
             latitude = store['geo']['latitude'] rescue -0.174505
             longitude = store['geo']['longitude'] rescue -78.48359
