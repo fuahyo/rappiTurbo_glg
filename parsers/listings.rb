@@ -59,7 +59,7 @@ if parse
             products.each do |product|
                 
                 pd  = Helper.parseProduct(product, store, subcat, vars, i)
-                pd['product_id'] = product['master_product_id']
+                pd['barcode'] = product['master_product_id']
                 pd['category_id'] = product['category_id']
                 outputs << pd
 
