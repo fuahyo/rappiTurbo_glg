@@ -184,7 +184,7 @@ class Helper
                 reviews: nil,
                 store_reviews: nil,
                 item_attributes: item_attributes,
-                item_identifiers: item_identifiers,
+                item_identifiers: nil,
                 country_of_origin: nil,
                 variants: nil,
                 uom: uom,
