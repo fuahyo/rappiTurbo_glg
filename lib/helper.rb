@@ -172,7 +172,7 @@ class Helper
                 img_url: img_url,
                 barcode: barcode,
                 sku: sku,
-                url: product_url,
+                url: product_url.gsub('%', 'percent').gsub("\n",''),
                 is_available: is_available,
                 crawled_source: "WEB",
                 is_promoted: is_promoted,
