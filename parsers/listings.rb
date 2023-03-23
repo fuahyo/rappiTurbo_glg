@@ -48,7 +48,7 @@ if parse
     
     json_data = json_script['props']['pageProps']['fallback'][store_front]['aisle_detail_response']['data']['components'] rescue nil
     json_data ||= json_script['props']['pageProps']['fallback'][store_front]['sub_aisles_response']['data']['components']
-
+    category_id = json_script['props']['pageProps']['fallback'][store_front]['aisle_detail_response_extras']['aisle']['parent_id']
     i = 1
 
     unless json_data.nil? 
@@ -61,6 +61,7 @@ if parse
                 pd  = Helper.parseProduct(product, store, subcat, vars, i)
                 pd['barcode'] = product['master_product_id']
                 pd['category_id'] = product['category_id']
+                pd['category_id_parent'] = category_id #category_id
                 outputs << pd
 
                 i = i+1
