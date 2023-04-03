@@ -38,7 +38,7 @@ if parse
     html = Nokogiri::HTML(content)
 
     article = html.at_css('article')
-    store = JSON.parse(article.text)
+    store = JSON.parse(article.text) rescue nil
     script = html.at("script#__NEXT_DATA__")
     json_script = JSON.parse(script)
 
