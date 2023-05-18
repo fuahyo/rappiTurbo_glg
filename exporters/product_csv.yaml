@@ -28,7 +28,7 @@ fields:
   - header: "brand"
     path: "brand"
   - header: "category_id"
-    path: "category_id"
+    path: "category_id_parent"
   - header: "category"
     path: "category"
   - header: "sub_category"

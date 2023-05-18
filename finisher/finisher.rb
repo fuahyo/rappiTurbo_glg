@@ -11,27 +11,25 @@ while true
 
   records.each do |prod|
     if prod['category'] == 'Congelados'
-        require 'byebug'
-        byebug
-        prod['category_id'] = '2878'
+        prod['category_id_parent'] = '2878'
     elsif prod['category'] == 'Bebidas'
-        prod['category_id'] = '2807'
+        prod['category_id_parent_parent'] = '2807'
     elsif prod['category'] == 'Quesos y fiambres'
-        prod['category_id'] = '2924'
+        prod['category_id_parent'] = '2924'
     elsif prod['category'] == 'Snacks y Galletitas'
-        prod['category_id'] = '2933'
+        prod['category_id_parent'] = '2933'
     elsif prod['category'] == 'Frescos y lácteos'
-        prod['category_id'] = '2882'
+        prod['category_id_parent'] = '2882'
     elsif prod['category'] == 'Bebidas alcohólicas'
-        prod['category_id'] = '2814'
+        prod['category_id_parent'] = '2814'
     elsif prod['category'] == 'Listo para comer'
-        prod['category_id'] = '2905'
+        prod['category_id_parent'] = '2905'
     elsif prod['category'] == 'Tabaco'
-        prod['category_id'] = '2938'
+        prod['category_id_parent'] = '2938'
     elsif prod['category'] == 'Helados y Postres'
-        prod['category_id'] = '3774'
+        prod['category_id_parent'] = '3774'
     elsif prod['category'] == 'Chocolates y Golosinas'
-        prod['category_id'] = '3923'
+        prod['category_id_parent'] = '3923'
     end
     outputs << prod
 
