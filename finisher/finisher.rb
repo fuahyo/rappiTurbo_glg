@@ -11,6 +11,8 @@ while true
 
   records.each do |prod|
     if prod['category'] == 'Congelados'
+        require 'byebug'
+        byebug
         prod['category_id'] = '2878'
     elsif prod['category'] == 'Bebidas'
         prod['category_id'] = '2807'
@@ -30,8 +32,6 @@ while true
         prod['category_id'] = '3774'
     elsif prod['category'] == 'Chocolates y Golosinas'
         prod['category_id'] = '3923'
-    elsif prod['category'] == 'Listo para comer'
-        prod['category_id'] = '2905'
     end
     outputs << prod
 
