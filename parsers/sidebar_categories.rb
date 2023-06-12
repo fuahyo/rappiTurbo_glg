@@ -56,6 +56,8 @@ if parser
             pd  = Helper.parseProduct(product, store, subcat,vars, i)
             pd['category_id'] = product['category_id']
             pd['category_id_parent'] = category_id
+            pd['scraped_at_timestamp'] = (ENV['reparse'] == "1" ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S'))
+
             outputs << pd
 
             i = i+1
