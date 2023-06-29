@@ -62,7 +62,7 @@ if parse
                 pd['barcode'] = product['master_product_id']
                 pd['category_id'] = product['category_id']
                 pd['category_id_parent'] = category_id #category_id
-                pd['scraped_at_timestamp'] = (ENV['reparse'] == "1" ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S'))
+                pd['scraped_at_timestamp'] = ((ENV['needs_reparse'] == 1 || ENV['needs_reparse'] == "1") ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S'))
 
                 outputs << pd
 
