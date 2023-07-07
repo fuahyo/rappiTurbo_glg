@@ -1,6 +1,6 @@
 html = Nokogiri::HTML(content)
 
-categories = html.css("div.sc-4ecf5053-2.jWwdvX ul a")
+categories = html.css("div.sc-b09cd34d-2.lhUIef ul a")
 categories.each_with_index do |category, idx|
     subcategories = category.css('ul li a')
     if subcategories.empty?
