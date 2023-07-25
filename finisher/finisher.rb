@@ -32,6 +32,8 @@ while true
         prod['category_id_parent'] = '3923'
     elsif prod['category'] == 'Vinos'
         prod['category_id_parent'] = '3919'
+    elsif prod['category'] == 'Ofertas'
+        prod['category_id_parent'] = '3773'
     end
     outputs << prod
 
