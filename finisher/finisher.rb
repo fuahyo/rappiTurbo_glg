@@ -56,7 +56,7 @@ while true
   }
   records = find_outputs("products", query, 1, per_page)
 
-  records['data'].each do |product|
+  records.each do |product|
     # require 'byebug'; byebug
     unless product['competitor_product_id'] == "185340_2113858933"
         product['_collection'] = "new_products"
@@ -66,7 +66,7 @@ while true
     save_outputs(outputs) if outputs.count > 99
   end
 
-  break if records['data'].nil? || records['data'].count < 1
+  break if records.nil? || records.count < 1
 
-  last_id = records['data'].last['_id']
+  last_id = records.last['_id']
 end
