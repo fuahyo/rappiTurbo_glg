@@ -39,7 +39,7 @@ fields:
     path: "brand"
     disable_scientific_notation: true
   - header: "category_id"
-    path: "category_id"
+    path: "category_id_parent"
     disable_scientific_notation: true
   - header: "category"
     path: "category"
