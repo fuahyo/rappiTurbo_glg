@@ -1,6 +1,6 @@
 exporter_name: product_csv
 exporter_type: csv
-collection: products
+collection: new_products
 export_filename: <d:yyyyMMdd>_<name>
 no_subfolder: true
 start_on_job_done: true
@@ -39,7 +39,7 @@ fields:
     path: "brand"
     disable_scientific_notation: true
   - header: "category_id"
-    path: "category_id_parent"
+    path: "category_id"
     disable_scientific_notation: true
   - header: "category"
     path: "category"
