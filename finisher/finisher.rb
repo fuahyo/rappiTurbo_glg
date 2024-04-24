@@ -58,8 +58,8 @@ while true
 
   records.each do |product|
     # require 'byebug'; byebug
-    unless product['competitor_product_id'] == "185340_2113858933"
-        product['_collection'] = "new_products"
+    if product['category_id'] == 137
+        product['category'] = "Listo para comer"
     end
     outputs << product
 

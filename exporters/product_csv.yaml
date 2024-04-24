@@ -1,6 +1,6 @@
 exporter_name: product_csv
 exporter_type: csv
-collection: new_products
+collection: products
 export_filename: <d:yyyyMMdd>_<name>
 no_subfolder: true
 start_on_job_done: true
