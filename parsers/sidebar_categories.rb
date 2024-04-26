@@ -54,10 +54,9 @@ if parser
         category_id = json['state']['parent_id']
         products.each do |product|
             pd  = Helper.parseProduct(product, store, subcat,vars, i)
-            pd['category_id'] = product['category_id']
-            pd['category_id_parent'] = category_id
+            # pd['category_id'] = product['category_id']
+            # pd['category_id_parent'] = category_id
             pd['scraped_at_timestamp'] = ((ENV['needs_reparse'] == 1 || ENV['needs_reparse'] == "1") ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S'))
-
             outputs << pd
 
             i = i+1

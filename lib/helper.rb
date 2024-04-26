@@ -82,7 +82,7 @@ class Helper
             competitor_product_id = product['id']
             name = product['name']
             brand = product['trademark']
-            category_id = nil
+            category_id = vars['cat_id']
             category = vars['cat']
             sub_category = subcat
             customer_price_lc = product['price'].to_f
